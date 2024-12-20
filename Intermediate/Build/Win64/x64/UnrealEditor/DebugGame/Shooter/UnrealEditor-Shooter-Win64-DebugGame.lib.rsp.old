@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-Shooter-Win64-DebugGame.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\ue\project\Shooter\Intermediate\Build\Win64\x64\ShooterEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h.obj"
+"D:\ue\project\Shooter\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\Shooter\Shooter.init.gen.cpp.obj"
+"D:\ue\project\Shooter\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\Shooter\ShootGameModeBase.gen.cpp.obj"
+"D:\ue\project\Shooter\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\Shooter\Shooter.cpp.obj"
+"D:\ue\project\Shooter\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\Shooter\ShootGameModeBase.cpp.obj"
+"D:\ue\project\Shooter\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\Shooter\Default.rc2.res"
+/OUT:"D:\ue\project\Shooter\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\Shooter\UnrealEditor-Shooter-Win64-DebugGame.lib"
