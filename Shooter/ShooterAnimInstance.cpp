@@ -44,10 +44,7 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 			LastMovementOffsetYaw = MovementOffsetYaw;
 		}
 
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(1, 0.f, FColor::White, OffsetMessage);
-		}
+		bAiming = ShooterCharacter->GetAiminig();
 	}
 }
 
