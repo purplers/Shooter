@@ -1,5 +1,0 @@
-.vs/Shooter/v17/Browse.VC.db filter=lfs diff=lfs merge=lfs -text
-Intermediate/Build/Win64/x64/ShooterEditor/DebugGame/UnrealEd/SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h.pch filter=lfs diff=lfs merge=lfs -text
-.vs/Shooter/v17/ipch/9d2aed53cfeedec5.ipch filter=lfs diff=lfs merge=lfs -text
-.vs/Shooter/v17/Solution.VC.db filter=lfs diff=lfs merge=lfs -text
-Intermediate/Build/Win64/x64/ShooterEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch filter=lfs diff=lfs merge=lfs -text

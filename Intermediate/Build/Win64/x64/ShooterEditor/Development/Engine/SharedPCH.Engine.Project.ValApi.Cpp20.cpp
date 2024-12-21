@@ -1,2 +1,0 @@
-// Compiler: 14.38.33141
-#include "D:/ue/project/Shooter/Intermediate/Build/Win64/x64/ShooterEditor/Development/Engine/SharedPCH.Engine.Project.ValApi.Cpp20.h"
