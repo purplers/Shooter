@@ -160,6 +160,8 @@ private:
 
 	FTimerHandle AutoFireTimer;
 
+	bool TraceUnderCrosshairs(FHitResult& OutHitResult, FVector& OutHitLocation);
+
 public:
 
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom;  };
