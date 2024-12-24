@@ -14,4 +14,10 @@ class SHOOTER_API AWeapon : public AItem
 {
 	GENERATED_BODY()
 	
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties", meta = (AllowPrivateAccess = "true"))
+	int32 Ammo;
+
+public:
+	FORCEINLINE int32 GetAmmo() const { return Ammo; }
 };
