@@ -58,6 +58,10 @@ protected:
 	UFUNCTION()
 	void AutoFireReset();
 
+	bool TraceUnderCrosshairs(FHitResult& OutHitResult, FVector& OutHitLocation);
+
+	void TraceForItems();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -160,16 +164,25 @@ private:
 
 	FTimerHandle AutoFireTimer;
 
-	bool TraceUnderCrosshairs(FHitResult& OutHitResult, FVector& OutHitLocation);
+	bool bShouldTraceForItems;
+
+	int8 OverlappedItemCount;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
+	class AItem* TraceHitItemLastFrame;
 
 public:
 
-	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom;  };
+	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom;  }
 
-	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; };
+	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-	FORCEINLINE bool GetAiminig() const { return bAiming; };
+	FORCEINLINE bool GetAiminig() const { return bAiming; }
 
 	UFUNCTION(BlueprintCallable)
 	float GetCrosshairSpreadMultiplier() const;
+
+	FORCEINLINE int8 GetOverlappedItemCount() const { return OverlappedItemCount; }
+
+	void IncrementOverlappedItemCount(int8 Amount);
 };
