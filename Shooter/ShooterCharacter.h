@@ -206,6 +206,12 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	AItem* TraceHitItem;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
+	float CamaraInterpDistance;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
+	float CamaraInterpElevation;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
 	TMap<EAmmoType, int32> AmmoMap;
@@ -230,4 +236,8 @@ public:
 	FORCEINLINE int8 GetOverlappedItemCount() const { return OverlappedItemCount; }
 
 	void IncrementOverlappedItemCount(int8 Amount);
+
+	FVector GetCameraInterpLocation();
+
+	void GetPickupItem(AItem* Item);
 };
