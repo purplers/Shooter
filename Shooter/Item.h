@@ -6,6 +6,19 @@
 #include "GameFramework/Actor.h"
 #include "Item.generated.h"
 
+UENUM(BlueprintType)
+enum class EItemState : uint8
+{
+	EIS_Pickup UMETA(DisplayName = "Pickup"),
+	EIS_EquipInterping UMETA(DisplayName = "EquipInterping"),
+	EIS_Pickedup UMETA(DisplayName = "Pickedup"),
+	EIS_Equipped UMETA(DisplayName = "Equipped"),
+	EIS_Falling UMETA(DisplayName = "Falling"),
+
+
+	EIS_MAX UMETA(DisplayName = "DefaultMax")
+};
+
 UCLASS()
 class SHOOTER_API AItem : public AActor
 {
@@ -35,6 +48,9 @@ protected:
 		UPrimitiveComponent* OtherComponent,
 		int32 OtherBodyIndex);
 
+
+	void SetItemProperties(EItemState State);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -59,11 +75,16 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
 	int32 ItemCount;
 
+
+
+	EItemState ItemState;
+
 public:
 	FORCEINLINE UWidgetComponent* GetPickupWidget() const { return PickupWidget; }
-
 	FORCEINLINE USphereComponent* GetAreaSphere() const { return AreaSphere; }
-
 	FORCEINLINE UBoxComponent* GetCollisionBox() const { return CollisionBox; }
+	FORCEINLINE EItemState GetItemState() const { return ItemState; }
+	void SetItemState(EItemState State);
+	FORCEINLINE USkeletalMeshComponent* GetItemMesh() const { return ItemMesh; }
 
 };

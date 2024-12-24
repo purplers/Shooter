@@ -73,9 +73,15 @@ protected:
 
 	class AWeapon* SpawnDefaultWeapon();
 
-	void EquipWeapon( AWeapon* WeaponToEquip);
+	void EquipWeapon(AWeapon* WeaponToEquip);
 
+	void DropWeapon();
 
+	void SelectButtonPressed();
+
+	void SelectButtonReleased();
+
+	void SwapWeapon(AWeapon* WeaponToSwap);
 
 
 
@@ -197,6 +203,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AWeapon> DefaultWeaponClass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	AItem* TraceHitItem;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
 	TMap<EAmmoType, int32> AmmoMap;

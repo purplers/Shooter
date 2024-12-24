@@ -468,6 +468,9 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 	PlayerInputComponent->BindAction("AimingButton", IE_Pressed, this, &AShooterCharacter::AimingButtonPressed);
 	PlayerInputComponent->BindAction("AimingButton", IE_Released, this, &AShooterCharacter::AimingButtonReleased);
+
+	PlayerInputComponent->BindAction("Select", IE_Pressed, this, &AShooterCharacter::SelectButtonPressed);
+	PlayerInputComponent->BindAction("Select", IE_Released, this, &AShooterCharacter::SelectButtonReleased);
 }
 
 bool AShooterCharacter::TraceUnderCrosshairs(FHitResult& OutHitResult, FVector& OutHitLocation)
@@ -521,21 +524,21 @@ void AShooterCharacter::TraceForItems()
 		TraceUnderCrosshairs(ItemTraceResult, HitLocation);
 		if (ItemTraceResult.bBlockingHit)
 		{
-			AItem* HitItem = Cast<AItem>(ItemTraceResult.GetActor());
-			if (HitItem && HitItem->GetPickupWidget())
+			TraceHitItem = Cast<AItem>(ItemTraceResult.GetActor());
+			if (TraceHitItem && TraceHitItem->GetPickupWidget())
 			{
-				HitItem->GetPickupWidget()->SetVisibility(true);
+				TraceHitItem->GetPickupWidget()->SetVisibility(true);
 			}
 
 
 			if (TraceHitItemLastFrame)
 			{
-				if (HitItem != TraceHitItemLastFrame)
+				if (TraceHitItem != TraceHitItemLastFrame)
 				{
 					TraceHitItemLastFrame->GetPickupWidget()->SetVisibility(false);
 				}
 			}
-			TraceHitItemLastFrame = HitItem;
+			TraceHitItemLastFrame = TraceHitItem;
 
 		}
 	}
@@ -561,9 +564,6 @@ void AShooterCharacter::EquipWeapon(AWeapon* WeaponToEquip)
 {
 	if (WeaponToEquip)
 	{
-		WeaponToEquip->GetAreaSphere()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-		WeaponToEquip->GetCollisionBox()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-
 		const USkeletalMeshSocket* HandSocket = GetMesh()->GetSocketByName(FName("RightHandSocket"));
 
 		if (HandSocket)
@@ -572,7 +572,45 @@ void AShooterCharacter::EquipWeapon(AWeapon* WeaponToEquip)
 		}
 
 		EquippedWeapon = WeaponToEquip;
+		EquippedWeapon->SetItemState(EItemState::EIS_Equipped);
+
 	}
+}
+
+void AShooterCharacter::DropWeapon()
+{
+	if (EquippedWeapon)
+	{
+		FDetachmentTransformRules DetachmentTransformRules(EDetachmentRule::KeepWorld, true);
+		EquippedWeapon->GetItemMesh()->DetachFromComponent(DetachmentTransformRules);
+
+		EquippedWeapon->SetItemState(EItemState::EIS_Falling);
+		EquippedWeapon->ThrowWeapon();
+	}
+}
+
+void AShooterCharacter::SelectButtonPressed()
+{
+	if (TraceHitItem)
+	{
+		auto TraceHitWeapon = Cast<AWeapon>(TraceHitItem);
+		SwapWeapon(TraceHitWeapon);
+	}
+	else
+	{
+		DropWeapon();
+	}
+}
+
+void AShooterCharacter::SelectButtonReleased()
+{
+}
+
+void AShooterCharacter::SwapWeapon(AWeapon* WeaponToSwap)
+{
+	DropWeapon();
+
+	EquipWeapon(WeaponToSwap);
 }
 
 void AShooterCharacter::InitializeAmmoMap()
