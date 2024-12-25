@@ -50,6 +50,12 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties", meta = (AllowPrivateAccess = "true"))
 	EAmmoType AmmoType;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties", meta = (AllowPrivateAccess = "true"))
+	float Damage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties", meta = (AllowPrivateAccess = "true"))
+	float HeadShotDamage;
+
 public:
 	void ThrowWeapon();
 
@@ -60,8 +66,10 @@ public:
 	void DecrementAmmo();
 
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
-
 	FORCEINLINE EAmmoType GetAmmoType() const { return AmmoType; }
+	FORCEINLINE float GetDamage() const { return Damage; }
+	FORCEINLINE float GetHeadShotDamage() const { return HeadShotDamage; }
+
 
 	void ReloadAmmo(int32 Amount);
 };
